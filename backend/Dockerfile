@@ -15,3 +15,4 @@ COPY wait-for-mysql.sh /wait-for-mysql.sh
 RUN chmod +x /wait-for-mysql.sh
 
 CMD ["/wait-for-mysql.sh", "localhost", "npm", "test"]
+
