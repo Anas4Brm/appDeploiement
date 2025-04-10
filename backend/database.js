@@ -1,20 +1,16 @@
-const sqlite3 = require("sqlite3").verbose();
-
-const db = new sqlite3.Database("./users.db", (err) => {
-  if (err) {
-    console.error("Error opening database", err.message);
-  } else {
-    console.log("Connected to SQLite database");
-    db.run(`
-      CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        prenom TEXT NOT NULL,
-        nom TEXT NOT NULL,
-        age INTEGER,
-        email TEXT UNIQUE NOT NULL
-      )
-    `);
-  }
-});
-
-module.exports = db;
+const mysql = require("mysql2"); 
+require("dotenv").config(); 
+const connection = mysql.createConnection({ 
+host: "mysql_db", // Nom du service Docker 
+user: process.env.MYSQL_USER, 
+password: process.env.MYSQL_PASSWORD, 
+database: process.env.MYSQL_DATABASE, 
+}); 
+connection.connect((err) => { 
+if (err) { 
+console.error("Erreur de connexion à la base de données : ", err); 
+return; 
+} 
+console.log("Connecté à la base de données MySQL !"); 
+}); 
+module.exports = connection;
