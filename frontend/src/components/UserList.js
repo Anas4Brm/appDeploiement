@@ -31,46 +31,65 @@ const UserList = () => {
   }, []);
 
   return (
-    <div className="container mt-5">
-      <h2>User Management</h2>
+    <div className="container py-5">
+      <div className="mb-5">
+        <h2 className="fw-bold text-primary mb-3">👥 User Management</h2>
+        <p className="text-muted">Add, edit, or delete users easily.</p>
+      </div>
+
       <UserForm
         editingUser={editingUser}
         setEditingUser={setEditingUser}
         fetchUsers={fetchUsers}
       />
-      <table className="table table-striped mt-4">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>
-                <button
-                  className="btn btn-warning me-2"
-                  onClick={() => setEditingUser(user)}
-                >
-                  Edit
-                </button>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(user.id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+
+      <div className="card shadow-sm rounded-4 border-0 mt-5">
+        <div className="card-body p-4">
+          <h5 className="card-title fw-semibold mb-3">📋 User List</h5>
+          <div className="table-responsive">
+            <table className="table table-hover align-middle mb-0">
+              <thead className="table-light">
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th className="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <td className="text-muted">{user.id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td className="text-end">
+                      <button
+                        className="btn btn-sm btn-outline-primary me-2"
+                        onClick={() => setEditingUser(user)}
+                      >
+                        ✏️ Edit
+                      </button>
+                      <button
+                        className="btn btn-sm btn-outline-danger"
+                        onClick={() => handleDelete(user.id)}
+                      >
+                        🗑️ Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {users.length === 0 && (
+                  <tr>
+                    <td colSpan="4" className="text-center text-muted py-3">
+                      No users found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

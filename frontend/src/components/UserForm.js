@@ -31,17 +31,17 @@ const UserForm = ({ editingUser, setEditingUser, fetchUsers }) => {
   };
 
   return (
-    <div className="card mb-4">
-      <div className="card-body">
-        <h5 className="card-title">
+    <div className="card shadow-sm rounded-4 border-0 mb-4">
+      <div className="card-body p-4">
+        <h5 className="card-title mb-4 fw-bold text-primary">
           {editingUser ? "✏️ Edit User" : "➕ Add New User"}
         </h5>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label className="form-label">Name</label>
+            <label className="form-label fw-semibold">Name</label>
             <input
               type="text"
-              className="form-control"
+              className="form-control form-control-lg rounded-3"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -50,10 +50,10 @@ const UserForm = ({ editingUser, setEditingUser, fetchUsers }) => {
             />
           </div>
           <div className="mb-3">
-            <label className="form-label">Email</label>
+            <label className="form-label fw-semibold">Email</label>
             <input
               type="email"
-              className="form-control"
+              className="form-control form-control-lg rounded-3"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -61,18 +61,20 @@ const UserForm = ({ editingUser, setEditingUser, fetchUsers }) => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
-            {editingUser ? "Update" : "Submit"}
-          </button>
-          {editingUser && (
-            <button
-              type="button"
-              className="btn btn-secondary ms-2"
-              onClick={() => setEditingUser(null)}
-            >
-              Cancel
+          <div className="d-flex gap-2">
+            <button type="submit" className="btn btn-primary btn-lg">
+              {editingUser ? "Update" : "Submit"}
             </button>
-          )}
+            {editingUser && (
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-lg"
+                onClick={() => setEditingUser(null)}
+              >
+                Cancel
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </div>
